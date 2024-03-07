@@ -2,7 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 
-function PostList({ posts }) {
+interface Post {
+  id: number;
+  title: string;
+}
+
+interface PostListProps {
+  posts: Post[];
+}
+
+function PostList({ posts }: PostListProps) {
   const [currentPage, setCurrentPage] = useState(0); // react-paginate는 0부터 시작
   const postsPerPage = 5;
 
@@ -13,7 +22,7 @@ function PostList({ posts }) {
   );
 
   // 페이지 변경 핸들러
-  const handlePageClick = (data) => {
+  const handlePageClick = (data: { selected: number }) => {
     setCurrentPage(data.selected);
   };
 
@@ -40,8 +49,8 @@ function PostList({ posts }) {
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}
         onPageChange={handlePageClick} // 페이지 변경 시 호출될 함수
-        containerClassName={'pagination'} // Pagination container class
-        activeClassName={'active'} // Active page number class
+        containerClassName={'pagination'}
+        activeClassName={'active'}
       />
     </>
   );

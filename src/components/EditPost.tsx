@@ -1,45 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-function EditPost({ updatePost, posts }) {
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
+
+interface EditPostProps {
+  updatePost: (post: Post) => void;
+  posts: Post[];
+}
+
+function EditPost({ updatePost, posts }: EditPostProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  const { post: initialPost } = location.state;
+  // location.state의 타입을 보장하기 위한 타입 단언 사용
+  const { post: initialPost } = location.state as { post: Post };
 
-  const [title, setTitle] = useState(initialPost.title || '');
-  const [content, setContent] = useState(initialPost.content || '');
-  const [isModified, setIsModified] = useState(false);
+  const [title, setTitle] = useState<string>(initialPost.title || '');
+  const [content, setContent] = useState<string>(initialPost.content || '');
+  const [isModified, setIsModified] = useState<boolean>(false);
 
   useEffect(() => {
     setTitle(initialPost.title);
     setContent(initialPost.content);
   }, [initialPost]);
 
-  const handleTitleChange = (event) => {
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
     setIsModified(true);
   };
 
-  const handleContentChange = (event) => {
+  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
     setIsModified(true);
   };
+
   const handleCancel = () => {
     navigate(-1);
   };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // 수정된 포스트 객체 생성
-    const updatedPost = {
-      ...initialPost, // 기존 포스트 데이터 복사
-      title, // 수정된 제목
-      content, // 수정된 내용
-    }; // App 컴포넌트로 수정된 포스트 전달
-    updatePost(updatedPost);
 
-    // 수정 완료 후 해당 포스트의 상세 페이지로 이동
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const updatedPost: Post = {
+      ...initialPost,
+      title,
+      content,
+    };
+    updatePost(updatedPost);
     navigate(`/postDetail/${initialPost.id}`);
   };
+
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -61,4 +73,5 @@ function EditPost({ updatePost, posts }) {
     </>
   );
 }
+
 export default EditPost;

@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function NewPost({ onAddPost, posts }) {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지 상태
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+}
+
+interface NewPostProps {
+  onAddPost: (post: Post) => void;
+  posts: Post[];
+}
+
+function NewPost({ onAddPost, posts }: NewPostProps) {
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [errorMessage, setErrorMessage] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // 제목 중복 검사
     const existingPost = posts.find((post) => post.title === title);
@@ -21,12 +32,12 @@ function NewPost({ onAddPost, posts }) {
     navigate('/');
   };
 
-  const handleTitleChange = (event) => {
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
     setErrorMessage(''); // 제목을 수정하면 에러 메시지 초기화
   };
 
-  const handleContentChange = (event) => {
+  const handleContentChange = (event: ChangeEvent<HTMLInputElement>) => {
     setContent(event.target.value);
   };
 
@@ -41,8 +52,7 @@ function NewPost({ onAddPost, posts }) {
           value={title}
           onChange={handleTitleChange}
         />
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}{' '}
-        {/* 에러 메시지 표시 */}
+        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
         <label htmlFor='content'>내용</label>
         <input
           id='content'
@@ -56,4 +66,5 @@ function NewPost({ onAddPost, posts }) {
     </>
   );
 }
+
 export default NewPost;
