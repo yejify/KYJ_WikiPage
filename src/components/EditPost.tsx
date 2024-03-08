@@ -1,5 +1,6 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { styled } from 'styled-components';
 
 interface Post {
   id: number;
@@ -53,25 +54,68 @@ function EditPost({ updatePost, posts }: EditPostProps) {
   };
 
   return (
-    <>
+    <EditPostWrap>
       <form onSubmit={handleSubmit}>
         <label>
-          제목
+          TITLE
           <input type='text' value={title} onChange={handleTitleChange} />
         </label>
         <label>
-          내용
+          CONTENT
           <textarea value={content} onChange={handleContentChange} />
         </label>
-        <button type='button' onClick={handleCancel}>
-          취소
-        </button>
-        <button type='submit' disabled={!isModified}>
-          저장
-        </button>
+        <div id='buttonBox'>
+          <button type='button' onClick={handleCancel}>
+            CANCEL
+          </button>
+          <button type='submit' disabled={!isModified}>
+            SAVE
+          </button>
+        </div>
       </form>
-    </>
+    </EditPostWrap>
   );
 }
 
 export default EditPost;
+const EditPostWrap = styled.section`
+  margin: 30px 100px 0 100px;
+  width: auto;
+  label {
+    display: block;
+    font-size: 30px;
+  }
+  input,
+  textarea {
+    width: 100%;
+    display: block;
+    background-color: #f6f6f6;
+    color: #7d7b7b;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 20px;
+  }
+  textarea {
+    min-height: 200px;
+  }
+  button {
+    border: 1px solid;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
+  }
+  #buttonBox {
+    display: flex;
+    gap: 25px;
+    position: absolute;
+    right: 100px;
+  }
+`;

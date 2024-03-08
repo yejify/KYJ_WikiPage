@@ -6,6 +6,7 @@ import PostDetail from './components/PostDetail';
 import NotFound from './components/NotFound';
 import NewPost from './components/NewPost';
 import EditPost from './components/EditPost';
+import GlobalStyle from './GlobalStyle';
 
 interface Post {
   id: number;
@@ -51,6 +52,7 @@ function App() {
 
   return (
     <>
+      <GlobalStyle />
       <BrowserRouter>
         <Header />
         <Routes>

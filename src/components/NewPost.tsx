@@ -1,5 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { styled } from 'styled-components';
 
 interface Post {
   id: number;
@@ -37,14 +38,14 @@ function NewPost({ onAddPost, posts }: NewPostProps) {
     setErrorMessage(''); // 제목을 수정하면 에러 메시지 초기화
   };
 
-  const handleContentChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setContent(event.target.value);
   };
 
   return (
-    <>
+    <NewPostWrap>
       <form onSubmit={handleSubmit}>
-        <label htmlFor='title'>제목</label>
+        <label htmlFor='title'>TITLE</label>
         <input
           id='title'
           type='text'
@@ -52,19 +53,62 @@ function NewPost({ onAddPost, posts }: NewPostProps) {
           value={title}
           onChange={handleTitleChange}
         />
-        {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-        <label htmlFor='content'>내용</label>
-        <input
+        {errorMessage && <p className='errorMessage'>{errorMessage}</p>}
+        <label htmlFor='content'>CONTENT</label>
+        <textarea
           id='content'
-          type='text'
           placeholder='내용을 입력하세요'
           value={content}
           onChange={handleContentChange}
         />
-        <button type='submit'>생성</button>
+        <button type='submit'>CREAT</button>
       </form>
-    </>
+    </NewPostWrap>
   );
 }
 
 export default NewPost;
+
+const NewPostWrap = styled.section`
+  margin: 30px 100px 0 100px;
+  width: auto;
+  label {
+    display: block;
+    font-size: 30px;
+  }
+  input,
+  textarea {
+    width: 100%;
+    display: block;
+    background-color: #f6f6f6;
+    color: #7d7b7b;
+    border-radius: 5px;
+    padding: 20px;
+    margin: 20px 0;
+    font-size: 20px;
+  }
+  .errorMessage {
+    color: red;
+    width: fit-content;
+    position: absolute;
+    top: 240px;
+    right: 120px;
+  }
+  textarea {
+    min-height: 200px;
+  }
+  button {
+    border: 1px solid;
+    border-radius: 5px;
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 20px;
+    float: right;
+    &:hover {
+      color: #fff;
+      background-color: #000;
+    }
+  }
+`;
