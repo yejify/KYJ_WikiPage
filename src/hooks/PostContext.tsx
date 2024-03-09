@@ -15,13 +15,14 @@ import {
   doc,
   DocumentData,
   Firestore,
+  DocumentReference,
 } from 'firebase/firestore';
 import { Post } from '../types/Post';
 
 // Context에 포함될 값의 타입 정의
 interface PostContextType {
   posts: Post[];
-  addPost: (newPost: Omit<Post, 'id'>) => Promise<void>;
+  addPost: (newPost: Omit<Post, 'id'>) => Promise<void>; // 수정된 부분
   updatePost: (updatedPost: Post) => Promise<void>;
   deletePost: (postId: string) => Promise<void>;
 }
@@ -71,13 +72,10 @@ export const PostProvider = ({ children }: PostProviderProps) => {
     fetchPosts();
   }, []);
 
-  // 데이터 추가
-  const addPost = async (newPost: Omit<Post, 'id'>) => {
-    const docRef = await addDoc(
-      collection(db, 'posts'),
-      newPost as DocumentData,
-    );
-    setPosts([...posts, { ...newPost, id: docRef.id }]);
+  const addPost = async (newPost: Omit<Post, 'id'>): Promise<void> => {
+    const docRef = await addDoc(collection(db, 'posts'), newPost);
+    const addNewPost = { ...newPost, id: docRef.id };
+    setPosts([addNewPost, ...posts]);
   };
 
   // 데이터 수정
