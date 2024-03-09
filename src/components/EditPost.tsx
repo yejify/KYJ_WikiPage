@@ -11,7 +11,6 @@ interface EditPostProps {
 function EditPost({ updatePost, posts }: EditPostProps) {
   const navigate = useNavigate();
   const location = useLocation();
-  // location.state의 타입을 보장하기 위한 타입 단언 사용
   const { post: initialPost } = location.state as { post: Post };
 
   const [title, setTitle] = useState<string>(initialPost.title || '');
@@ -105,6 +104,15 @@ const EditPostWrap = styled.section`
     &:hover {
       color: #fff;
       background-color: #000;
+    }
+    &:disabled {
+      color: #cecece;
+      border: 1px solid #cecece;
+      cursor: default;
+      &:hover {
+        color: #7d7b7b;
+        background-color: #fff;
+      }
     }
   }
   #buttonBox {

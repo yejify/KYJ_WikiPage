@@ -30,7 +30,6 @@ function NewPost({ onAddPost, posts }: NewPostProps) {
 
   const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
-    setErrorMessage(''); // 제목을 수정하면 에러 메시지 초기화
   };
 
   const handleContentChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -56,7 +55,9 @@ function NewPost({ onAddPost, posts }: NewPostProps) {
           value={content}
           onChange={handleContentChange}
         />
-        <button type='submit'>CREAT</button>
+        <button type='submit' disabled={!title || !content}>
+          CREATE
+        </button>
       </form>
     </NewPostWrap>
   );
@@ -104,6 +105,15 @@ const NewPostWrap = styled.section`
     &:hover {
       color: #fff;
       background-color: #000;
+    }
+    &:disabled {
+      color: #cecece;
+      border: 1px solid #cecece;
+      cursor: default;
+      &:hover {
+        color: #7d7b7b;
+        background-color: #fff;
+      }
     }
   }
 `;
