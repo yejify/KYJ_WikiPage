@@ -2,6 +2,7 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import { Post } from '../types/Post';
+import { nanoid } from 'nanoid';
 
 interface NewPostProps {
   onAddPost: (post: Post) => void;
@@ -23,7 +24,7 @@ function NewPost({ onAddPost, posts }: NewPostProps) {
       return; // 중복되는 경우 추가 처리를 중단
     }
 
-    const id = Date.now().toString();
+    const id = nanoid();
     onAddPost({ id, title, content });
     navigate('/');
   };
