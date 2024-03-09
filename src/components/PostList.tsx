@@ -85,6 +85,7 @@ const PostListWrap = styled.section`
   #postListBox {
     margin: 50px 100px;
     border-top: 2px solid;
+    height: 327px;
   }
   #postListBox li {
     border-bottom: 1px solid #cecece;
@@ -108,6 +109,7 @@ const StyledPaginateContainer = styled(ReactPaginate)`
     height: 35px;
     align-items: center;
     justify-content: center;
+    color: #d9d9d9;
 
     a {
       display: flex;
@@ -119,11 +121,12 @@ const StyledPaginateContainer = styled(ReactPaginate)`
       justify-content: center;
 
       &:hover {
-        color: #d9d9d9;
+        color: #7d7b7b;
       }
     }
   }
-  #activeClassName {
+  .active {
     border-bottom: 1px solid;
+    color: #000;
   }
 `;
