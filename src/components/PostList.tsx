@@ -27,7 +27,7 @@ function PostList({ posts }: PostListProps) {
     <PostListWrap>
       <h2>Post List</h2>
       <Link to='/NewPost' id='newPostButton'>
-        <button>NEW POST</button>
+        <button>CREAT</button>
       </Link>
       <ul id='postListBox'>
         {currentPosts.map((post) => (
