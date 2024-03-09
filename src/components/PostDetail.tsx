@@ -2,12 +2,7 @@ import React from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import NotFound from './NotFound';
 import { styled } from 'styled-components';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
+import { Post } from '../types/Post';
 
 interface PostDetailProps {
   posts: Post[];

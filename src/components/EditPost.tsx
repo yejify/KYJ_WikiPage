@@ -1,12 +1,7 @@
 import React, { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { styled } from 'styled-components';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
+import { Post } from '../types/Post';
 
 interface EditPostProps {
   updatePost: (post: Post) => void;

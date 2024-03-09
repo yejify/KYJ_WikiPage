@@ -1,12 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
-
-interface Post {
-  id: number;
-  title: string;
-  content: string;
-}
+import { Post } from '../types/Post';
 
 interface NewPostProps {
   onAddPost: (post: Post) => void;
@@ -28,7 +23,7 @@ function NewPost({ onAddPost, posts }: NewPostProps) {
       return; // 중복되는 경우 추가 처리를 중단
     }
 
-    const id = Date.now();
+    const id = Date.now().toString();
     onAddPost({ id, title, content });
     navigate('/');
   };

@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 import ReactPaginate from 'react-paginate';
-
-interface Post {
-  id: number;
-  title: string;
-}
+import { Post } from '../types/Post';
 
 interface PostListProps {
   posts: Post[];
