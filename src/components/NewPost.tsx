@@ -112,7 +112,7 @@ const NewPostWrap = styled.section`
       border: 1px solid #cecece;
       cursor: default;
       &:hover {
-        color: #7d7b7b;
+        color: #cecece;
         background-color: #fff;
       }
     }
