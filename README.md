@@ -8,16 +8,13 @@ Wiki Page는 사용자가 위키 항목을 생성, 읽기, 수정 및 삭제할 
 
 [Wiki Page](https://wiki-page-blue.vercel.app/)
 
-## 테크 스택
+## 사용한 라이브러리
 
 - **React**: 사용자 인터페이스를 만들기 위한 JavaScript 라이브러리
 - **React Router Dom**: React 애플리케이션의 라우팅을 관리하기 위한 라이브러리
 - **Firebase**: 데이터베이스 및 인증을 위한 클라우드 서비스
 - **Styled Components**: CSS-in-JS 라이브러리로 스타일을 컴포넌트에 적용
 - **Nanoid**: 고유한 ID를 생성하기 위한 라이브러리
-
-## 라이브러리
-
 - **React Paginate**: 페이지네이션 구현을 위한 React 컴포넌트 라이브러리
 
 ## 구현 기능
